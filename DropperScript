@@ -1,0 +1,26 @@
+wait(2)
+workspace:WaitForChild("PartStorage")
+local proxPrompt = script.Parent.Clicker.ProximityPrompt
+
+
+deb = true 
+
+proxPrompt.Triggered:Connect(function()
+	if deb == true then
+		deb = false
+		local part = Instance.new("Part",workspace.PartStorage)
+		part.BrickColor=script.Parent.Parent.Parent.DropColor.Value
+		part.Material=script.Parent.Parent.Parent.MaterialValue.Value
+		local cash = Instance.new("IntValue",part)
+		cash.Name = "Cash"
+		cash.Value = 1 -- How much the drops are worth
+		part.CFrame = script.Parent.Drop.CFrame - Vector3.new(0,1.3,0)
+		part.FormFactor = "Custom"
+		part.Size=Vector3.new(1, 1, 1) -- Size of the drops
+		part.TopSurface = "Smooth"
+		part.BottomSurface = "Smooth"
+		game.Debris:AddItem(part,20) -- How long until the drops expire
+		wait(.15)
+		deb = true
+	end
+end)
